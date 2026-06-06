@@ -42,12 +42,43 @@ SET GLOBAL local_infile = 1;
 
 -- Step 4. import data from .csv file to sql
 
+-- Disable foreign key checks to avoid constraint violations during import
+SET FOREIGN_KEY_CHECKS = 0;
+
 -- import customer table
 LOAD DATA LOCAL INFILE '/Users/apple/Documents/PES/github/data-science_mini-projects/SQL_Tableau/data/dim_customers.csv' INTO
 TABLE customers FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
 -- import product table
 LOAD DATA LOCAL INFILE '/Users/apple/Documents/PES/github/data-science_mini-projects/SQL_Tableau/data/dim_products.csv' INTO
-TABLE customers FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
+TABLE products FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
 -- import order table
 LOAD DATA LOCAL INFILE '/Users/apple/Documents/PES/github/data-science_mini-projects/SQL_Tableau/data/fact_order_lines.csv' INTO
-TABLE customers FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
+TABLE orders FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS (
+    order_id,
+    @order_placement_date,
+    customer_id,
+    product_id,
+    order_qty,
+    @agreed_delivery_date,
+    @actual_delivery_date,
+    delivery_qty,
+    in_full,
+    on_time,
+    otif
+)
+SET
+    order_placement_date = STR_TO_DATE(
+        @order_placement_date,
+        '%d-%b-%y'
+    ),
+    agreed_delivery_date = STR_TO_DATE(
+        @agreed_delivery_date,
+        '%d-%b-%y'
+    ),
+    actual_delivery_date = STR_TO_DATE(
+        @actual_delivery_date,
+        '%d-%b-%y'
+    );
+
+-- Re-enable foreign key checks
+SET FOREIGN_KEY_CHECKS = 1;
