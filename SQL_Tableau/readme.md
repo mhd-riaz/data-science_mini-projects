@@ -11,3 +11,13 @@ curl -L -o ~/Downloads/atliq-marts-challenge.zip\
 ```
 
 All this data has been downloaded and kept inside the data/ directory, but not committed in this repository.
+
+---
+
+Section 2.2 SQL Data Preparation and Analysis
+
+Refer: 
+- 1. DDL [link](https://github.com/mhd-riaz/data-science_mini-projects/blob/main/SQL_Tableau/SQL/DDL.sql)
+- 2. DQL [link](https://github.com/mhd-riaz/data-science_mini-projects/blob/main/SQL_Tableau/SQL/DQL.sql)
+
+---
