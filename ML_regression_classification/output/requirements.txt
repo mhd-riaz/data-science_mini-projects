@@ -1,0 +1,17 @@
+# Core data-science stack (versions used to produce the submitted results)
+numpy==2.5.1
+pandas==3.0.5
+scikit-learn==1.9.0
+scipy==1.18.0
+matplotlib==3.11.1
+seaborn==0.13.2
+joblib==1.5.3
+threadpoolctl==3.6.0
+
+# Notebook execution
+jupyter==1.1.1
+jupyterlab==4.6.2
+notebook==7.6.1
+ipykernel==7.3.0
+nbformat==5.10.4
+nbconvert==7.17.1
